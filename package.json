@@ -18,8 +18,10 @@
     "@types/react": "16.9.23",
     "@types/react-native": "0.61.20",
     "@types/react-test-renderer": "16.9.2",
+    "axios": "0.19.2",
     "react": "16.9.0",
-    "react-native": "0.61.5"
+    "react-native": "0.61.5",
+    "react-native-svg": "12.0.2"
   },
   "devDependencies": {
     "@babel/core": "7.8.7",
@@ -38,7 +40,7 @@
     "metro-react-native-babel-preset": "0.58.0",
     "prettier": "1.19.1",
     "react-test-renderer": "16.9.0",
-    "typescript": "^3.8.3"
+    "typescript": "3.8.3"
   },
   "jest": {
     "preset": "react-native"

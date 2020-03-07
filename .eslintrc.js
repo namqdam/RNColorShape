@@ -8,6 +8,7 @@ module.exports = {
   extends: ['@react-native-community', 'plugin:prettier/recommended'],
   root: true,
   rules: {
+    '@typescript-eslint/no-unused-vars': 'off',
     'react-native/no-inline-styles': 'off',
   },
   settings: {
