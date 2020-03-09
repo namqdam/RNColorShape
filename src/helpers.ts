@@ -15,3 +15,5 @@ export const randomHeight = () => {
 export const randomWidth = () => {
   return Math.round(Math.random() * (maxWidth - minWidth)) + minWidth;
 };
+
+export const DOUBLE_TAP_DELAY = 300;

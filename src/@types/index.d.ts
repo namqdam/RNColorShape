@@ -1,10 +1,10 @@
-type TapLoc = {
+type ShapeSpecs = {
   key: number;
-  topLeftX: number;
-  topLeftY: number;
-  rightBottomX: number;
-  rightBottomY: number;
+  x: number;
+  y: number;
   height: number;
   width: number;
-  touchedTime: number;
+  type: ShapeType;
 };
+
+type ShapeType = 'square' | 'circle' | 'triangle';
