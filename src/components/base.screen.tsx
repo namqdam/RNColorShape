@@ -5,6 +5,7 @@ import {Svg, Rect} from 'react-native-svg';
 import {SquareView} from '@app/components/shared/square.view';
 import {randomHeight, randomWidth} from '@app/helpers';
 import {CircleView} from './shared/circle.view';
+import {TriangleView} from './shared/triangle.view';
 
 interface BaseViewState {
   shapeSpecsList: ShapeSpecs[];
@@ -53,14 +54,18 @@ class BaseScreen extends React.Component<BaseViewProps, BaseViewState> {
       <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
         <Svg height="100%" width="100%" onPress={this.onPressLayer}>
           <Rect x="0" y="0" width="100%" height="100%" />
-          {shapeSpecsList.map(shapeSpecs => {
-            if (shapeSpecs.type === 'square') return <SquareView key={`${shapeSpecs.key}`} shapeSpecs={shapeSpecs} />;
-            return <CircleView key={`${shapeSpecs.key}`} shapeSpecs={shapeSpecs} />;
-          })}
+          {shapeSpecsList.map(shapeSpecs => this.renderShape(shapeSpecs))}
         </Svg>
       </SafeAreaView>
     );
   }
+
+  renderShape = (shapeSpecs: ShapeSpecs) => {
+    if (shapeSpecs.type === 'square') return <SquareView key={`${shapeSpecs.key}`} shapeSpecs={shapeSpecs} />;
+    if (shapeSpecs.type === 'circle') return <CircleView key={`${shapeSpecs.key}`} shapeSpecs={shapeSpecs} />;
+    if (shapeSpecs.type === 'triangle') return <TriangleView key={`${shapeSpecs.key}`} shapeSpecs={shapeSpecs} />;
+    return null;
+  };
 }
 
 const withShapeType = (...type: ShapeType[]) => {

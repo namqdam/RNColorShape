@@ -23,11 +23,11 @@ const _SquareView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
   };
 
   useEffect(() => {
-    const fetchColor = async () => {
+    const fetchImage = async () => {
       const imageUri = await ColorService.generateImage();
       setUri(imageUri);
     };
-    fetchColor();
+    fetchImage();
   }, []);
 
   if (!uri) return null;
@@ -38,7 +38,7 @@ const _SquareView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
       y={`${Math.round(shapeSpecs.y - shapeSpecs.height / 2)}`}
       height={`${shapeSpecs.height}`}
       width={`${shapeSpecs.width}`}
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMidYMid slice"
       href={{uri}}
       onPress={onPress}
     />
