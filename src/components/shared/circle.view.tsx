@@ -8,14 +8,21 @@ const _CircleView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
   const lastTappedTime = useRef(null);
   const [fillColor, setFillColor] = useState('transparent');
 
+  const renewColor = async () => {
+    try {
+      const color = await ColorService.generateColor();
+      setFillColor(color);
+    } catch (error) {
+      setFillColor(ColorService.randomColor());
+    }
+  };
+
   const onPress = async (event: GestureResponderEvent) => {
     const currentTime = new Date().getTime();
 
     if (lastTappedTime.current && currentTime - lastTappedTime.current <= DOUBLE_TAP_DELAY) {
       lastTappedTime.current = currentTime;
-
-      const color = await ColorService.generateColor();
-      setFillColor(color);
+      renewColor();
       return;
     }
 
@@ -23,11 +30,7 @@ const _CircleView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
   };
 
   useEffect(() => {
-    const fetchColor = async () => {
-      const color = await ColorService.generateColor();
-      setFillColor(color);
-    };
-    fetchColor();
+    renewColor();
   }, []);
 
   const radius = Math.round((shapeSpecs.height + shapeSpecs.width) / 4);

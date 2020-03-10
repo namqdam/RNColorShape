@@ -44,23 +44,42 @@ const _TriangleView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
 const ImageMask = forwardRef(
   ({maskKey, onPress}: {maskKey: number; onPress: (event: GestureResponderEvent) => void}, ref) => {
     const [uri, setUri] = useState(null);
+    const [fillColor, setFillColor] = useState(null);
 
-    useEffect(() => {
-      const fetchImage = async () => {
+    const renewImage = async () => {
+      try {
         const imageUri = await ColorService.generateImage();
         setUri(imageUri);
-      };
-      fetchImage();
+        setFillColor(null);
+      } catch (error) {
+        setUri(null);
+        setFillColor(ColorService.randomColor());
+      }
+    };
+
+    useEffect(() => {
+      renewImage();
     }, []);
 
     useImperativeHandle(ref, () => ({
       async update() {
-        const imageUri = await ColorService.generateImage();
-        setUri(imageUri);
+        renewImage();
       },
     }));
 
-    if (!uri) return null;
+    if (!uri && !fillColor) return null;
+    if (fillColor)
+      return (
+        <Rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill={`${fillColor}`}
+          clipPath={`url(#clip${maskKey})`}
+          onPress={onPress}
+        />
+      );
 
     return (
       <Image
@@ -81,20 +100,24 @@ const ColorMask = forwardRef(
   ({maskKey, onPress}: {maskKey: number; onPress: (event: GestureResponderEvent) => void}, ref) => {
     const [fillColor, setFillColor] = useState('transparent');
 
-    useEffect(() => {
-      const fetchColor = async () => {
+    const renewColor = async () => {
+      try {
         const color = await ColorService.generateColor();
         setFillColor(color);
-      };
-      fetchColor();
+      } catch (error) {
+        setFillColor(ColorService.randomColor());
+      }
+    };
+    useEffect(() => {
+      renewColor();
     }, []);
 
     useImperativeHandle(ref, () => ({
       async update() {
-        const color = await ColorService.generateColor();
-        setFillColor(color);
+        renewColor();
       },
     }));
+
     return (
       <Rect
         x="0"
