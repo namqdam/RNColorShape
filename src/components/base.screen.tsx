@@ -2,10 +2,10 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
 import React from 'react';
 import {GestureResponderEvent, SafeAreaView} from 'react-native';
 import {Svg, Rect} from 'react-native-svg';
+import {CircleView} from '@app/components/shared/circle.view';
 import {SquareView} from '@app/components/shared/square.view';
+import {TriangleView} from '@app/components/shared/triangle.view';
 import {randomHeight, randomWidth} from '@app/helpers';
-import {CircleView} from './shared/circle.view';
-import {TriangleView} from './shared/triangle.view';
 
 interface BaseViewState {
   shapeSpecsList: ShapeSpecs[];
