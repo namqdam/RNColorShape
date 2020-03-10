@@ -1,4 +1,4 @@
-# React Native svg Shape Example
+# React Native SVG Shape Example
 
 A mobile application built using React Native
 
