@@ -7,8 +7,6 @@ import {ColorService} from '@app/services/color.service';
 const _TriangleView = ({shapeSpecs}: {shapeSpecs: ShapeSpecs}) => {
   const maskRef = useRef<any>();
   const lastTappedTime = useRef(null);
-
-  // const [lastTappedTime, setLastTappedTime] = useState(null);
   const [type, setType] = useState(Math.floor(Math.random() * 2));
 
   const onPress = async (event: GestureResponderEvent) => {
